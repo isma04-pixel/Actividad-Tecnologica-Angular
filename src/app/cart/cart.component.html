@@ -1,0 +1,68 @@
+<section class="py-5 bg-body" data-bs-theme="dark">
+  <div class="container">
+    <h2 class="h3 fw-semibold mb-4 text-light">Carrito de compras</h2>
+
+    <div class="row g-4">
+      <!-- Lista de productos -->
+      <div class="col-lg-8">
+        <div class="d-flex flex-column gap-3">
+          @for (cartItem of state.products(); track cartItem.product.id) {
+            <app-cart-item
+              class="card p-3 bg-dark text-light border-secondary"
+              [productCartItem]="cartItem"
+              (onRemove)="onRemove($event)"
+              (onDecrease)="onDecrease($event)"
+              (onIncrease)="onIncrease($event)"
+            />
+          }
+        </div>
+      </div>
+
+      <!-- Resumen del pedido -->
+      <div class="col-lg-4">
+        <div class="card shadow-sm bg-dark text-light border-secondary">
+          <div class="card-body">
+            <p class="h5 fw-semibold mb-4">Pedido</p>
+
+            <div class="mb-3">
+              <dl class="d-flex justify-content-between mb-2">
+                <dt class="text-muted">Precio</dt>
+                <dd class="fw-medium text-light">
+                  {{ state.price() | currency }}
+                </dd>
+              </dl>
+
+              <dl class="d-flex justify-content-between mb-2">
+                <dt class="text-muted">Descuentos</dt>
+                <dd class="text-success">-$0.00</dd>
+              </dl>
+            </div>
+
+            <hr class="border-secondary">
+
+            <dl class="d-flex justify-content-between mb-4">
+              <dt class="fw-bold">Total</dt>
+              <dd class="fw-bold text-light">
+                {{ state.price() | currency }}
+              </dd>
+            </dl>
+
+            <a href="#"
+               class="btn btn-success w-100 mb-3">
+              Proceder a comprar
+            </a>
+
+            <div class="text-center">
+              <span class="text-muted small">o</span>
+              <a href="#"
+                 class="ms-2 small text-decoration-underline link-primary">
+                Continuar comprando
+                <i class="bi bi-arrow-right"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
